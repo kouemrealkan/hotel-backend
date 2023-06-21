@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway
+  config:
+    name: api-gateway
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8888}
+  cloud:
+    config:
+      username: ${CONFIG_SERVER_USERNAME:user}
+      password: ${CONFIG_SERVER_PASSWORD:12345}
+      enabled: true
+      fail-fast: false
+      retry:
+        max-attempts: 15
+        initial-interval: 1000
+        multiplier: 1.1
+        max-interval: 2000
+      label: ${CONFIG_SERVER_LABEL:test}
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+resilience4j:
+  timelimiter:
+    configs:
+      default:
+        cancel-running-future: false
+        timeout-duration: 10s

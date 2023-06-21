@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: discovery-service
+  config:
+    name: discovery-service
+    import: optional:configserver:${CLOUD_CONFIG_SERVER_URL}
+  cloud:
+    config:
+      uri: ${CLOUD_CONFIG_SERVER_URL}
+      username: ${CLOUD_CONFIG_USERNAME}
+      password: ${CLOUD_CONFIG_PASSWORD}
+      label: ${CLOUD_CONFIG_LABEL:develop}

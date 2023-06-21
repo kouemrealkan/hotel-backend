@@ -1,0 +1,36 @@
+info:
+  description: Config Server
+server:
+  port: ${vcap.application.port:8888}
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/shared
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 5
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+---
+spring:
+  config:
+    activate:
+      on-profile: cloud
+
